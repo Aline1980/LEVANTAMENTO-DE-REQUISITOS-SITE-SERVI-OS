@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Levantamento de Requisitos para Sites de Serviço</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        .option-card {
+            /* Basic styling for the card */
+            @apply relative flex items-center justify-between p-4 border border-gray-300 rounded-lg cursor-pointer transition-all duration-200 ease-in-out;
+            @apply hover:bg-blue-50 hover:border-blue-400;
+        }
+        .option-card.selected {
+            /* Styling when the card is selected */
+            @apply bg-blue-100 border-blue-600 ring-2 ring-blue-500;
+        }
+        .option-card .main-icon {
+            /* Styling for the main descriptive icon */
+            @apply text-xl mr-3; /* Increased margin for better spacing */
+        }
+        .option-card.selected .main-icon {
+            /* Main icon styling when selected */
+            @apply text-blue-600;
+        }
+        .option-card span {
+            /* Text styling */
+            @apply text-gray-700 flex-grow; /* Allows text to take available space */
+        }
+        .option-card.selected span {
+            /* Text styling when selected */
+            @apply text-blue-800 font-semibold;
+        }
+        .checkbox-indicator {
+            /* Styling for the checkbox icon itself */
+            @apply text-2xl ml-4; /* Margin to separate from text */
+        }
+        .option-card:not(.selected) .checkbox-indicator {
+            @apply text-gray-400; /* Default color when not selected */
+        }
+        .option-card.selected .checkbox-indicator {
+            @apply text-blue-600; /* Blue when selected */
+        }
+
+        /* Print specific styles */
+        @media print {
+            body {
+                background-color: #fff;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .max-w-4xl {
+                max-width: 100% !important;
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+            section {
+                border: 1px solid #e5e7eb !important; /* Ensure borders are visible on print */
+                page-break-inside: avoid; /* Avoid breaking sections across pages */
+            }
+            h1, h2, h3, p {
+                color: #000 !important; /* Ensure text is black for printing */
+            }
+            input, textarea {
+                border: 1px solid #d1d5db !important; /* Ensure input borders are visible */
+            }
+            .option-card {
+                border: 1px solid #d1d5db !important;
+                background-color: #f9fafb !important;
+            }
+            .option-card.selected {
+                background-color: #e0f2fe !important; /* Lighter blue for print */
+                border-color: #60a5fa !important;
+            }
+            .option-card.selected .main-icon,
+            .option-card.selected span,
+            .checkbox-indicator {
+                color: #3b82f6 !important; /* Ensure colors are visible for all elements */
+            }
+            .option-card:not(.selected) .checkbox-indicator {
+                color: #9ca3af !important; /* Lighter gray for unchecked on print */
+            }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8 lg:p-10 bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="max-w-4xl w-full bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-lg border border-gray-200">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-6 text-center">
+            Formulário de Levantamento de Requisitos para Sites de Serviço
+        </h1>
+        <p class="text-gray-600 mb-8 text-center leading-relaxed">
+            Olá! Para criar um site que represente sua empresa e seus serviços de forma eficaz, preparei este formulário de levantamento de requisitos. Ele me ajudará a entender suas necessidades, objetivos e as funcionalidades essenciais para o seu projeto.
+            <br>
+            Por favor, preencha as informações com o máximo de detalhes possível. Isso garantirá um desenvolvimento mais alinhado às suas expectativas.
+        </p>
+
+        <form id="servicosForm" action="https://formspree.io/f/mzzgpgjb" method="POST" class="space-y-8">
+            <!-- 1. Informações Gerais do Projeto -->
+            <section class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">1. Informações Gerais do Projeto</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="nomeEmpresa" class="block text-sm font-medium text-gray-700 mb-1">Nome da Empresa/Marca:</label>
+                        <input type="text" id="nomeEmpresa" name="Nome da Empresa" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Sua Empresa de Contabilidade Ltda.">
+                    </div>
+                    <div>
+                        <label for="nomeContato" class="block text-sm font-medium text-gray-700 mb-1">Nome do Contato Principal:</label>
+                        <input type="text" id="nomeContato" name="Nome do Contato" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="João da Silva">
+                    </div>
+                    <div>
+                        <label for="emailContato" class="block text-sm font-medium text-gray-700 mb-1">E-mail para Contato:</label>
+                        <input type="email" id="emailContato" name="Email para Contato" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="contato@suaempresa.com.br">
+                    </div>
+                    <div>
+                        <label for="telefoneContato" class="block text-sm font-medium text-gray-700 mb-1">Telefone para Contato:</label>
+                        <input type="tel" id="telefoneContato" name="Telefone para Contato" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="(XX) XXXXX-XXXX">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Qual o prazo ideal para o lançamento do site?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-name="prazoLancamento" data-type="radio">
+                            <div class="option-card" data-value="o_mais_rapido_possivel">
+                                <i class="main-icon fas fa-rocket text-red-500"></i> <span>O mais rápido possível</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="1-3_meses">
+                                <i class="main-icon fas fa-calendar-alt text-yellow-500"></i> <span>1-3 meses</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="3-6_meses">
+                                <i class="main-icon fas fa-calendar-check text-green-500"></i> <span>3-6 meses</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="acima_de_6_meses">
+                                <i class="main-icon fas fa-hourglass-half text-purple-500"></i> <span>Acima de 6 meses</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="ainda_nao_definido">
+                                <i class="main-icon fas fa-question-circle text-gray-500"></i> <span>Ainda não definido</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" name="Prazo de Lançamento" id="prazoLancamento">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Você já possui um site atualmente?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-name="possuiSiteAtual" data-type="radio">
+                            <div class="option-card" data-value="sim">
+                                <i class="main-icon fas fa-check-circle text-green-500"></i> <span>Sim</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="nao">
+                                <i class="main-icon fas fa-times-circle text-red-500"></i> <span>Não</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" name="Possui Site Atual" id="possuiSiteAtual">
+                        <div id="siteAtualDetalhes" class="mt-4 hidden">
+                            <label for="enderecoSiteAtual" class="block text-sm font-medium text-gray-700 mb-1">Se sim, qual o endereço? Deseja migrar conteúdo ou criar um novo?</label>
+                            <textarea id="enderecoSiteAtual" name="Endereço Site Atual" rows="2" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: www.suaempresaantiga.com.br - Desejo manter o conteúdo existente."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Sobre a Empresa/Serviço -->
+            <section class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">2. Sobre a Empresa/Serviço</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="objetivoSite" class="block text-sm font-medium text-gray-700 mb-1">Qual o principal objetivo do seu site? (Ex: Gerar leads, informar sobre serviços, fortalecer a marca, etc.)</label>
+                        <textarea id="objetivoSite" name="Objetivo do Site" rows="3" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Apresentar nossos serviços de contabilidade e captar novos clientes."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Quais tipos de serviços você oferece?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" data-name="tiposServicos" data-type="checkbox">
+                            <div class="option-card" data-value="consultoria">
+                                <i class="main-icon fas fa-handshake text-blue-500"></i> <span>Consultoria</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="treinamento">
+                                <i class="main-icon fas fa-chalkboard-teacher text-blue-500"></i> <span>Treinamento</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="desenvolvimento_software">
+                                <i class="main-icon fas fa-code text-blue-500"></i> <span>Desenvolvimento de Software</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="marketing_digital">
+                                <i class="main-icon fas fa-bullhorn text-blue-500"></i> <span>Marketing Digital</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="contabilidade">
+                                <i class="main-icon fas fa-calculator text-blue-500"></i> <span>Contabilidade</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="juridico">
+                                <i class="main-icon fas fa-balance-scale text-blue-500"></i> <span>Serviços Jurídicos</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="saude_bem_estar">
+                                <i class="main-icon fas fa-heartbeat text-blue-500"></i> <span>Saúde e Bem-estar</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="educacao">
+                                <i class="main-icon fas fa-graduation-cap text-blue-500"></i> <span>Educação</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="outro_servico">
+                                <i class="main-icon fas fa-plus-circle text-blue-500"></i> <span>Outro (especifique)</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" name="Tipos de Serviços" id="tiposServicos">
+                        <div id="outroServicoDetalhes" class="mt-4 hidden">
+                            <label for="outroServicoInfo" class="block text-sm font-medium text-gray-700 mb-1">Especifique outro(s) serviço(s):</label>
+                            <input type="text" id="outroServicoInfo" name="Outro Serviço" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: Gestão de redes sociais, Consultoria financeira.">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="publicoAlvoServico" class="block text-sm font-medium text-gray-700 mb-1">Qual o seu público-alvo principal?</label>
+                        <textarea id="publicoAlvoServico" name="Público Alvo Serviço" rows="2" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Pequenas e médias empresas do setor de tecnologia."></textarea>
+                    </div>
+                    <div>
+                        <label for="diferenciais" class="block text-sm font-medium text-gray-700 mb-1">Quais são os principais diferenciais da sua empresa/serviços?</label>
+                        <textarea id="diferenciais" name="Diferenciais da Empresa" rows="3" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Atendimento personalizado, tecnologia de ponta, 20 anos de experiência no mercado."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Design e Identidade Visual -->
+            <section class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">3. Design e Identidade Visual</h2>
+                <div class="space-y-4">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Você já possui uma identidade visual (logotipo, cores, fontes, etc.) definida?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-name="identidadeVisual" data-type="radio">
+                            <div class="option-card" data-value="sim">
+                                <i class="main-icon fas fa-palette text-blue-500"></i> <span>Sim</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="nao">
+                                <i class="main-icon fas fa-paint-brush text-red-500"></i> <span>Não</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" name="Identidade Visual" id="identidadeVisual">
+                        <div id="identidadeVisualDetalhes" class="mt-4 hidden">
+                            <label for="identidadeVisualInfo" class="block text-sm font-medium text-gray-700 mb-1">Se sim, por favor, anexe ou indique onde podemos consultá-la. Se não, deseja que desenvolvamos uma proposta de identidade visual?</label>
+                            <textarea id="identidadeVisualInfo" name="Detalhes Identidade Visual" rows="2" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Link para o manual da marca ou 'Sim, por favor, me envie uma proposta.'"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="sitesReferencia" class="block text-sm font-medium text-gray-700 mb-1">Existem sites que você admira ou que servem como referência de design e funcionalidade para o seu projeto? (Por favor, liste os endereços e o que mais lhe agrada neles)</label>
+                        <textarea id="sitesReferencia" name="Sites de Referência" rows="3" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: www.agenciaexemplo.com.br (Gosto do layout moderno e das animações)."></textarea>
+                    </div>
+                    <div>
+                        <label for="preferenciaEstiloCores" class="block text-sm font-medium text-gray-700 mb-1">Há alguma preferência específica de estilo ou cores para o site?</label>
+                        <textarea id="preferenciaEstiloCores" name="Preferência Estilo/Cores" rows="2" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Preferência por tons sóbrios e profissionais, como azul marinho e cinza."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Funcionalidades Essenciais do Site (Múltipla Escolha) -->
+            <section class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">4. Funcionalidades Essenciais do Site</h2>
+                <p class="text-gray-600 mb-4">Marque todas as funcionalidades que você considera importantes para o seu site.</p>
+
+                <!-- Páginas Principais -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Páginas Principais:</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" data-type="checkbox" data-name="paginasPrincipais">
+                        <div class="option-card" data-value="home_page">
+                            <i class="main-icon fas fa-home text-blue-500"></i> <span>Página Inicial (Home)</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="sobre_nos">
+                            <i class="main-icon fas fa-users text-blue-500"></i> <span>Sobre Nós/Empresa</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="servicos">
+                            <i class="main-icon fas fa-briefcase text-blue-500"></i> <span>Página de Serviços</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="contato">
+                            <i class="main-icon fas fa-envelope text-blue-500"></i> <span>Contato</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="portfolio_projetos">
+                            <i class="main-icon fas fa-folder-open text-blue-500"></i> <span>Portfólio/Projetos</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="equipe">
+                            <i class="main-icon fas fa-user-tie text-blue-500"></i> <span>Nossa Equipe</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="depoimentos">
+                            <i class="main-icon fas fa-quote-right text-blue-500"></i> <span>Depoimentos de Clientes</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="faq_page">
+                            <i class="main-icon fas fa-question-circle text-blue-500"></i> <span>Página de Perguntas Frequentes (FAQ)</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="politica_privacidade">
+                            <i class="main-icon fas fa-shield-alt text-blue-500"></i> <span>Política de Privacidade e Termos de Uso</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                    </div>
+                    <input type="hidden" name="Páginas Principais" id="paginasPrincipais">
+                </div>
+
+                <!-- Conteúdo e Recursos -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Conteúdo e Recursos:</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" data-type="checkbox" data-name="conteudoRecursos">
+                        <div class="option-card" data-value="blog">
+                            <i class="main-icon fas fa-blog text-green-500"></i> <span>Blog/Notícias</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="galeria_imagens">
+                            <i class="main-icon fas fa-images text-green-500"></i> <span>Galeria de Imagens</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="galeria_videos">
+                            <i class="main-icon fas fa-video text-green-500"></i> <span>Galeria de Vídeos</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="download_materiais">
+                            <i class="main-icon fas fa-download text-green-500"></i> <span>Download de Materiais (e-books, whitepapers)</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="area_noticias">
+                            <i class="main-icon fas fa-newspaper text-green-500"></i> <span>Área de Notícias/Artigos</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                    </div>
+                    <input type="hidden" name="Conteúdo e Recursos" id="conteudoRecursos">
+                </div>
+
+                <!-- Área do Cliente -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Área do Cliente (Login Restrito):</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-type="checkbox" data-name="areaCliente">
+                        <div class="option-card" data-value="login_registro">
+                            <i class="main-icon fas fa-user-circle text-purple-500"></i> <span>Login e Registro de Clientes</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="acesso_documentos">
+                            <i class="main-icon fas fa-file-alt text-purple-500"></i> <span>Acesso a Documentos/Arquivos</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="acompanhamento_servicos">
+                            <i class="main-icon fas fa-tasks text-purple-500"></i> <span>Acompanhamento de Serviços/Status</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="informacoes_personalizadas">
+                            <i class="main-icon fas fa-info-circle text-purple-500"></i> <span>Informações Personalizadas do Cliente</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="envio_documentos_cliente">
+                            <i class="main-icon fas fa-upload text-purple-500"></i> <span>Envio de Documentos pelo Cliente</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                    </div>
+                    <input type="hidden" name="Área do Cliente" id="areaCliente">
+                </div>
+
+                <!-- Interação e Suporte -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Interação e Suporte:</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" data-type="checkbox" data-name="interacaoSuporte">
+                        <div class="option-card" data-value="formulario_contato">
+                            <i class="main-icon fas fa-envelope-open-text text-teal-500"></i> <span>Formulário de Contato</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="whatsapp_direto">
+                            <i class="main-icon fab fa-whatsapp text-green-500"></i> <span>Link Direto para WhatsApp (Dúvidas/Atendimento)</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="chat_online">
+                            <i class="main-icon fas fa-comments text-teal-500"></i> <span>Chat Online (integrado ao site)</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="agendamento_online">
+                            <i class="main-icon fas fa-calendar-alt text-teal-500"></i> <span>Sistema de Agendamento Online</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="integracao_redes_sociais">
+                            <i class="main-icon fas fa-share-alt text-teal-500"></i> <span>Integração com Redes Sociais</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                    </div>
+                    <input type="hidden" name="Interação e Suporte" id="interacaoSuporte">
+                </div>
+
+                <!-- SEO e Marketing -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3">SEO e Marketing:</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-type="checkbox" data-name="seoMarketing">
+                        <div class="option-card" data-value="otimizacao_seo">
+                            <i class="main-icon fas fa-search text-red-500"></i> <span>Otimização para SEO (Mecanismos de Busca)</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="google_analytics">
+                            <i class="main-icon fas fa-chart-bar text-red-500"></i> <span>Integração com Google Analytics</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="newsletter_captura_emails">
+                            <i class="main-icon fas fa-newspaper text-red-500"></i> <span>Newsletter/Captura de E-mails</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                    </div>
+                    <input type="hidden" name="SEO e Marketing" id="seoMarketing">
+                </div>
+
+                <!-- Segurança -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3">Segurança:</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-type="checkbox" data-name="seguranca">
+                        <div class="option-card" data-value="certificado_ssl">
+                            <i class="main-icon fas fa-lock text-gray-700"></i> <span>Certificado SSL (HTTPS)</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                        <div class="option-card" data-value="protecao_ddos">
+                            <i class="main-icon fas fa-shield-alt text-gray-700"></i> <span>Proteção Básica contra Ataques (DDoS)</span>
+                            <i class="checkbox-indicator fas fa-square"></i>
+                        </div>
+                    </div>
+                    <input type="hidden" name="Segurança" id="seguranca">
+                </div>
+            </section>
+
+            <!-- 5. Conteúdo e Mídias -->
+            <section class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">5. Conteúdo e Mídias</h2>
+                <div class="space-y-4">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Você já possui o conteúdo (textos, descrições de serviços, imagens, vídeos) para o site?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-name="conteudoMidias" data-type="radio">
+                            <div class="option-card" data-value="sim_todo_pronto">
+                                <i class="main-icon fas fa-check-double text-green-500"></i> <span>Sim, todo o conteúdo está pronto.</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="sim_maior_parte">
+                                <i class="main-icon fas fa-check text-yellow-500"></i> <span>Sim, a maior parte está pronta, mas preciso de auxílio em alguns pontos.</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="nao_preciso_auxilio">
+                                <i class="main-icon fas fa-times text-red-500"></i> <span>Não, preciso de auxílio na criação de conteúdo.</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" name="Conteúdo e Mídias" id="conteudoMidias">
+                    </div>
+                    <div>
+                        <label for="qualidadeImagensVideos" class="block text-sm font-medium text-gray-700 mb-1">Qual a qualidade das imagens e vídeos que serão utilizados? (Ex: Profissionais, amadoras, ainda não tenho)</label>
+                        <textarea id="qualidadeImagensVideos" name="Qualidade Imagens/Vídeos" rows="2" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Imagens profissionais de alta resolução."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Manutenção e Suporte -->
+            <section class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">6. Manutenção e Suporte</h2>
+                <div class="space-y-4">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Você tem uma equipe interna para gerenciar o site após o lançamento (atualização de conteúdo, etc.)?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-name="equipeManutencao" data-type="radio">
+                            <div class="option-card" data-value="sim">
+                                <i class="main-icon fas fa-users-cog text-blue-500"></i> <span>Sim</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="nao">
+                                <i class="main-icon fas fa-user-times text-red-500"></i> <span>Não</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" name="Equipe para Manutenção" id="equipeManutencao">
+                        <div id="planoManutencaoDetalhes" class="mt-4 hidden">
+                            <label for="planoManutencaoInfo" class="block text-sm font-medium text-gray-700 mb-1">Deseja um plano de manutenção e suporte?</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" data-name="desejaPlanoManutencao" data-type="radio">
+                                <div class="option-card" data-value="sim">
+                                    <i class="main-icon fas fa-check-circle text-green-500"></i> <span>Sim</span>
+                                    <i class="checkbox-indicator fas fa-square"></i>
+                                </div>
+                                <div class="option-card" data-value="nao">
+                                    <i class="main-icon fas fa-times-circle text-red-500"></i> <span>Não</span>
+                                    <i class="checkbox-indicator fas fa-square"></i>
+                                </div>
+                            </div>
+                            <input type="hidden" name="Deseja Plano de Manutenção" id="desejaPlanoManutencao">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Qual o seu nível de conhecimento técnico para gerenciar o site?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" data-name="nivelConhecimentoTecnico" data-type="radio">
+                            <div class="option-card" data-value="iniciante">
+                                <i class="main-icon fas fa-seedling text-blue-500"></i> <span>Iniciante</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="intermediario">
+                                <i class="main-icon fas fa-laptop-code text-blue-500"></i> <span>Intermediário</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                            <div class="option-card" data-value="avancado">
+                                <i class="main-icon fas fa-terminal text-blue-500"></i> <span>Avançado</span>
+                                <i class="checkbox-indicator fas fa-square"></i>
+                            </div>
+                        </div>
+                        <input type="hidden" name="Nível de Conhecimento Técnico" id="nivelConhecimentoTecnico">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Observações Adicionais -->
+            <section class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">7. Observações Adicionais</h2>
+                <div>
+                    <label for="observacoesAdicionais" class="block text-sm font-medium text-gray-700 mb-1">Há algo mais que você considera importante e que não foi abordado neste formulário? Por favor, utilize este espaço para adicionar qualquer informação relevante para o seu projeto.</label>
+                    <textarea id="observacoesAdicionais" name="Observações Adicionais" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: Preciso de um sistema de agendamento para serviços, além da venda de produtos."></textarea>
+                </div>
+            </section>
+
+            <div class="text-center mt-8 no-print">
+                <button type="submit" class="inline-flex items-center px-8 py-4 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 ease-in-out mr-4">
+                    <i class="fas fa-paper-plane mr-3"></i> Enviar Formulário
+                </button>
+                <button type="button" id="printFormBtn" class="inline-flex items-center px-8 py-4 border border-blue-600 text-base font-medium rounded-md shadow-sm text-blue-600 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 ease-in-out">
+                    <i class="fas fa-print mr-3"></i> Imprimir Formulário
+                </button>
+            </div>
+        </form>
+
+        <div id="messageBox" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden no-print">
+            <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
+                <h3 id="messageBoxTitle" class="text-xl font-bold mb-4 text-gray-800"></h3>
+                <p id="messageBoxContent" class="text-gray-600 mb-6"></p>
+                <button id="messageBoxClose" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to show custom message box (removed as Formspree handles submission feedback)
+            function showMessageBox(title, message) {
+                document.getElementById('messageBoxTitle').innerText = title;
+                document.getElementById('messageBoxContent').innerText = message;
+                document.getElementById('messageBox').classList.remove('hidden');
+            }
+
+            // Function to hide custom message box (removed)
+            document.getElementById('messageBoxClose').addEventListener('click', function() {
+                document.getElementById('messageBox').classList.add('hidden');
+            });
+
+            // Helper function to update the checkbox icon
+            function updateCheckboxIcon(card, isSelected) {
+                const checkboxIndicator = card.querySelector('.checkbox-indicator');
+                if (checkboxIndicator) {
+                    if (isSelected) {
+                        checkboxIndicator.classList.remove('fa-square', 'text-gray-400');
+                        checkboxIndicator.classList.add('fa-check-square', 'text-blue-600');
+                    } else {
+                        checkboxIndicator.classList.remove('fa-check-square', 'text-blue-600');
+                        checkboxIndicator.classList.add('fa-square', 'text-gray-400');
+                    }
+                }
+            }
+
+            // Handle option-card clicks
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const group = this.closest('[data-name]');
+                    const groupType = group.dataset.type; // 'radio' or 'checkbox'
+                    const hiddenInput = document.getElementById(group.dataset.name);
+
+                    if (groupType === 'radio') {
+                        // For radio-like behavior (single selection)
+                        group.querySelectorAll('.option-card').forEach(otherCard => {
+                            if (otherCard !== this) {
+                                otherCard.classList.remove('selected');
+                                updateCheckboxIcon(otherCard, false); // Deselect icon
+                            }
+                        });
+                        this.classList.add('selected'); // Select the clicked card
+                        updateCheckboxIcon(this, true); // Select icon
+                        // Update hidden input with single value
+                        hiddenInput.value = this.dataset.value;
+
+                    } else if (groupType === 'checkbox') {
+                        // For checkbox-like behavior (multiple selection)
+                        this.classList.toggle('selected'); // Toggle selected class
+                        updateCheckboxIcon(this, this.classList.contains('selected')); // Toggle icon
+
+                        // Update hidden input with array of selected values
+                        const selectedValues = Array.from(group.querySelectorAll('.option-card.selected'))
+                                                    .map(selectedCard => selectedCard.dataset.value);
+                        // Formspree expects name="fieldName[]" for arrays, so we use JSON.stringify
+                        // for better structured data, or join for simpler cases.
+                        // For this example, we'll use JSON.stringify for clarity in email.
+                        hiddenInput.value = JSON.stringify(selectedValues);
+                    }
+
+                    // Conditional display logic (applies to both types, checks if value is present)
+                    const currentGroupDataName = group.dataset.name;
+                    let selectedValueForConditional;
+                    try {
+                        selectedValueForConditional = groupType === 'radio' ? hiddenInput.value : JSON.parse(hiddenInput.value || '[]');
+                    } catch (e) {
+                        selectedValueForConditional = hiddenInput.value; // Fallback if JSON parsing fails
+                    }
+
+                    // Specific logic for "possuiSiteAtual"
+                    if (currentGroupDataName === 'possuiSiteAtual') {
+                        const show = selectedValueForConditional === 'sim';
+                        document.getElementById('siteAtualDetalhes').classList.toggle('hidden', !show);
+                        if (!show) document.getElementById('enderecoSiteAtual').value = '';
+                    }
+                    // Specific logic for "identidadeVisual"
+                    if (currentGroupDataName === 'identidadeVisual') {
+                        const show = selectedValueForConditional === 'sim' || selectedValueForConditional === 'nao';
+                        document.getElementById('identidadeVisualDetalhes').classList.toggle('hidden', !show);
+                        if (!show) document.getElementById('identidadeVisualInfo').value = '';
+                    }
+                    // Specific logic for "equipeManutencao"
+                    if (currentGroupDataName === 'equipeManutencao') {
+                        const show = selectedValueForConditional === 'nao';
+                        document.getElementById('planoManutencaoDetalhes').classList.toggle('hidden', !show);
+                        if (!show) document.getElementById('desejaPlanoManutencao').value = '';
+                    }
+                    // Specific logic for "tiposServicos" (for "outro_servico")
+                    if (currentGroupDataName === 'tiposServicos') {
+                        const show = Array.isArray(selectedValueForConditional) && selectedValueForConditional.includes('outro_servico');
+                        document.getElementById('outroServicoDetalhes').classList.toggle('hidden', !show);
+                        if (!show) document.getElementById('outroServicoInfo').value = '';
+                    }
+                });
+            });
+
+            // Print button functionality
+            document.getElementById('printFormBtn').addEventListener('click', function() {
+                window.print();
+            });
+
+            // Form submission (Formspree handles the actual sending)
+            const form = document.getElementById('servicosForm');
+            form.addEventListener('submit', function(event) {
+                // Formspree will handle the submission.
+                // We'll reset the form visually after a small delay.
+                setTimeout(() => {
+                    form.reset();
+                    document.querySelectorAll('.option-card.selected').forEach(card => {
+                        card.classList.remove('selected');
+                        updateCheckboxIcon(card, false); // Reset icon to unchecked
+                    });
+                    document.querySelectorAll('.hidden').forEach(el => el.classList.add('hidden')); // Hide conditional fields
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
